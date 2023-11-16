@@ -11,7 +11,8 @@
         "plugin:react-hooks/recommended",
         "plugin:jsx-a11y/recommended",
         "plugin:import/recommended",
-        "prettier"
+        "prettier",
+        "airbnb"
     ],
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
@@ -23,6 +24,7 @@
         "react"
     ],
     "rules": {
+      "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
     },
     "settings": {
       "import/resolver": {
