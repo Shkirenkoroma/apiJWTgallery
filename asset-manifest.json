@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/apiJWTgallery/static/css/main.8a685450.css",
+    "main.js": "/apiJWTgallery/static/js/main.661a2ce1.js",
+    "index.html": "/apiJWTgallery/index.html",
+    "main.8a685450.css.map": "/apiJWTgallery/static/css/main.8a685450.css.map",
+    "main.661a2ce1.js.map": "/apiJWTgallery/static/js/main.661a2ce1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8a685450.css",
+    "static/js/main.661a2ce1.js"
+  ]
+}
