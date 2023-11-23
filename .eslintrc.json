@@ -24,6 +24,8 @@
   },
   "plugins": ["@typescript-eslint", "react"],
   "rules": {
+    "object-curly-newline": "off",
+    "linebreak-style": 0,
     "arrow-body-style": ["error", "always"],
     "react/react-in-jsx-scope": "off",
     "react/jsx-filename-extension": [
