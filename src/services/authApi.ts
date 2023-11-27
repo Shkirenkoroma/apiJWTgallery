@@ -1,21 +1,21 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 export const authApi = createApi({
-  reducerPath: "authApi",
+  reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://testtourapp.heroukuapp.com"
+    baseUrl: 'https://testtourapp.heroukuapp.com',
   }),
   endpoints: (builder) => ({
     loginUser: builder.mutation({
-      query: (body: {email : string; password: string}) => {
+      query: (body: { email: string; password: string }) => {
         return {
-          url: "/signin",
-          method: "post",
+          url: '/users/signin',
+          method: 'post',
           body,
-        }
-      }
-    })
-  })
-})
+        };
+      },
+    }),
+  }),
+});
 
-export const { useLoginUserMutation } = authApi
+export const { useLoginUserMutation } = authApi;
