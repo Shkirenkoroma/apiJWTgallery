@@ -1,8 +1,13 @@
 import { FC, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { MDBInput } from 'mdb-react-ui-kit';
-import { useLoginUserMutation } from 'src/services/authApi';
+import {
+  useLoginUserMutation,
+  useRegisterUserMutation,
+} from 'src/services/authApi';
 import { toast } from 'react-toastify';
+import { useAppDispatch } from 'src/features/hooks';
+import { setUser } from 'src/features/authSlice';
 
 const initialState = {
   firstName: '',
@@ -16,6 +21,8 @@ const Auth: FC = (): JSX.Element => {
   const [formValue, setFormValue] = useState(initialState);
   const [showRegister, setShowRegister] = useState(false);
   const { firstName, lastName, email, password, confirmPassword } = formValue;
+  const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
   const [
     loginUser,
@@ -26,6 +33,16 @@ const Auth: FC = (): JSX.Element => {
       error: loginError,
     },
   ] = useLoginUserMutation();
+
+  const [
+    registerUser,
+    {
+      data: registerData,
+      isSuccess: isRegisterSuccess,
+      isError: isRegisterError,
+      error: registerError,
+    },
+  ] = useRegisterUserMutation();
 
   const handleChange = (e: any): void => {
     setFormValue({ ...formValue, [e.target.name]: e.target.value });
@@ -38,13 +55,31 @@ const Auth: FC = (): JSX.Element => {
       toast.error('Please, fill all Input field');
     }
   };
+  const handleRegister = async () => {
+    if (password !== confirmPassword) {
+      return toast.error('Password don`t match');
+    }
+    if (firstName && lastName && password && email) {
+      await registerUser({ firstName, lastName, email, password });
+    }
+  };
 
   useEffect(() => {
     if (isLoginSuccess) {
       toast.success('User Login Successfully');
+      dispatch(
+        setUser({ name: loginData.result.name, token: loginData.token })
+      );
       navigate('/dashboard');
     }
-  });
+    if (isRegisterSuccess) {
+      toast.success('User Register Successfully');
+      dispatch(
+        setUser({ name: registerData.result.name, token: registerData.token })
+      );
+      navigate('/dashboard');
+    }
+  }, [isLoginSuccess, isRegisterSuccess]);
 
   return (
     <section className="vh-100 gradient-custom">
@@ -130,7 +165,11 @@ const Auth: FC = (): JSX.Element => {
                       Login
                     </button>
                   ) : (
-                    <button className="btn btn-outline-light btn-lg px-5">
+                    <button
+                      className="btn btn-outline-light btn-lg px-5"
+                      type="button"
+                      onClick={() => handleRegister()}
+                    >
                       Register
                     </button>
                   )}
