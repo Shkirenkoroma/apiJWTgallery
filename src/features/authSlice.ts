@@ -17,14 +17,14 @@ export const authSlice = createSlice({
   reducers: {
     setUser: (
       state,
-      action: PayloadAction<{ name: string; token: string }>
+      action: PayloadAction<{ name: string; token: string }>,
     ) => {
       localStorage.setItem(
         'user',
         JSON.stringify({
           name: action.payload.name,
           token: action.payload.token,
-        })
+        }),
       );
       state.name = action.payload.name;
       state.token = action.payload.token;

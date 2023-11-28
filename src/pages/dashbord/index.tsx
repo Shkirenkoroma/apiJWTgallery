@@ -1,17 +1,17 @@
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { selectAuth, logout } from 'src/features/authSlice';
-import { useAppDispatch, useAppSelector } from 'src/features/hooks';
+import { useAppSelector, useAppDispatch } from 'src/features/hooks';
 
 const Dashbord = () => {
-  const {name} = useAppSelector(selectAuth);
+  const { name } = useAppSelector(selectAuth);
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const handleLogout = () => {
-    dispatch(logout())
-    toast.success("User Logout Successfully");
-    navigate("/auth");
+    dispatch(logout());
+    toast.success('User Logout Successfully');
+    navigate('/auth');
   };
 
   return (
@@ -30,7 +30,7 @@ const Dashbord = () => {
                   <button
                     className="btn btn-outline-light btn-lg px-5 mt-3"
                     type="button"
-                    onClick={()=>handleLogout()}
+                    onClick={() => handleLogout()}
                   >
                     Logout
                   </button>
